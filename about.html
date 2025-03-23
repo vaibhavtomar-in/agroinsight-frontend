@@ -28,15 +28,15 @@
   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-green-800 transition-all duration-300 shadow-lg">
     <div class="container mx-auto flex justify-between items-center py-4 px-6">
       <!-- Logo -->
-      <a href="home.html" class="text-white text-3xl font-bold tracking-wide flex items-center">
+      <a href="index.html" class="text-white text-3xl font-bold tracking-wide flex items-center">
         <span class="text-yellow-400 mr-2">🌱</span>
         Agro-Insight
       </a>
 
       <!-- Desktop Navigation -->
       <ul class="hidden md:flex space-x-8 text-lg font-medium" id="desktop-nav">
-        <li><a href="home.html" class="text-white hover:text-yellow-400 transition-colors">Home</a></li>
-        <li><a href="index.html" class="text-white hover:text-yellow-400 transition-colors">Services</a></li>
+        <li><a href="index.html" class="text-white hover:text-yellow-400 transition-colors">Home</a></li>
+        <li><a href="form.html" class="text-white hover:text-yellow-400 transition-colors">Services</a></li>
         <li><a href="about.html" class="text-white hover:text-yellow-400 transition-colors">About</a></li>
         <li><a href="history.html" class="text-white hover:text-yellow-400 transition-colors">History</a></li>
         <!-- Auth button will be inserted here by JS -->
@@ -51,10 +51,10 @@
 
   <!-- Full-Screen Mobile Menu -->
   <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-green-800 text-white flex flex-col items-center justify-center space-y-6 text-2xl transform -translate-x-full transition-transform duration-300 z-50">
-    <a href="home.html" class="mobile-link" onclick="closeMenu()">Home</a>
+    <a href="index.html" class="mobile-link" onclick="closeMenu()">Home</a>
     <a href="about.html" class="mobile-link" onclick="closeMenu()">About</a>
     <a href="history.html" class="mobile-link" onclick="closeMenu()">History</a>
-    <a href="index.html" class="mobile-link" onclick="closeMenu()">Services</a>
+    <a href="form.html" class="mobile-link" onclick="closeMenu()">Services</a>
     <!-- Auth mobile link will be inserted here by JS -->
   </div>
 
@@ -418,8 +418,8 @@
       <div>
         <h2 class="text-lg font-bold mb-2">Quick Links</h2>
         <ul>
-          <li><a href="home.html" class="hover:text-yellow-400 transition-colors">Home</a></li>
-          <li><a href="index.html" class="hover:text-yellow-400 transition-colors">Get Recommendation</a></li>
+          <li><a href="index.html" class="hover:text-yellow-400 transition-colors">Home</a></li>
+          <li><a href="form.html" class="hover:text-yellow-400 transition-colors">Get Recommendation</a></li>
           <li><a href="about.html" class="hover:text-yellow-400 transition-colors">About Us</a></li>
           <li><a href="history.html" class="hover:text-yellow-400 transition-colors">Recommendation History</a></li>
         </ul>
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('logout-btn').addEventListener('click', function(e) {
         e.preventDefault();
         localStorage.removeItem('userId');
-        window.location.href = 'home.html';
+        window.location.href = 'index.html';
       });
     }
   }
@@ -476,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
       logoutLink.addEventListener('click', function(e) {
         e.preventDefault();
         localStorage.removeItem('userId');
-        window.location.href = 'home.html';
+        window.location.href = 'index.html';
         closeMenu();
       });
       mobileMenu.appendChild(logoutLink);

@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchRecommendationHistory(userId);
     } else {
       // Redirect to login if no userId
-      window.location.href = "index.html";
+      window.location.href = "login.html";
     }
   }
 });
@@ -93,6 +93,7 @@ function logoutUser() {
   // Reload the page to reset UI
   window.location.reload();
 }
+
 
 function signupUser(event) {
   event.preventDefault();
@@ -144,14 +145,14 @@ function signupUser(event) {
           
           // Set timeout to automatically redirect after 2 seconds
           setTimeout(() => {
-            window.location.href = "home.html";
+            window.location.href = "index.html";
           }, 2000);
           
           // Add click event to dismiss on click anywhere
           document.addEventListener('click', function dismissToast() {
             document.body.removeChild(toast);
             document.removeEventListener('click', dismissToast);
-            window.location.href = "home.html";
+            window.location.href = "index.html";
           });
         } else {
           // If no userId is returned, show toast and switch to login
@@ -264,14 +265,14 @@ function loginUser(event) {
           
           // Set timeout to automatically redirect after 2 seconds
           setTimeout(() => {
-            window.location.href = "home.html";
+            window.location.href = "index.html";
           }, 2000);
           
           // Add click event to dismiss on click anywhere
           document.addEventListener('click', function dismissToast() {
             document.body.removeChild(toast);
             document.removeEventListener('click', dismissToast);
-            window.location.href = "home.html";
+            window.location.href = "index.html";
           });
         } else {
           // Show error toast for missing user info

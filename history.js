@@ -92,7 +92,7 @@ function logout() {
     icon: "success",
     confirmButtonColor: "#15803d"
   }).then(() => {
-    window.location.href = "home.html";
+    window.location.href = "index.html";
   });
 }
 
