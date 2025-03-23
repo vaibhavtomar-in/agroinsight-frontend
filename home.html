@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroInsight - Smart Crop Recommendation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-green-800 transition-all duration-300 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <!-- Logo -->
+      <a href="home.html" class="text-white text-3xl font-bold tracking-wide flex items-center">
+        <span class="text-yellow-400 mr-2">🌱</span>
+        Agro-Insight
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex space-x-8 text-lg font-medium">
+        <li><a href="home.html" class="text-white hover:text-yellow-400 transition-colors">Home</a></li>
+        <li><a href="form.html" class="text-white hover:text-yellow-400 transition-colors">Services</a></li>
+        <li><a href="about.html" class="text-white hover:text-yellow-400 transition-colors">About</a></li>
+        <li><a href="history.html" class="text-white hover:text-yellow-400 transition-colors">History</a></li>
+        <!-- Login/Signup or Logout button, dynamically rendered based on login status -->
+        <li id="authButton">
+          <!-- This will be populated via JavaScript -->
+        </li>
+      </ul>
+
+      <!-- Hamburger Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <div class="hamburger"></div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Full-Screen Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-green-800 text-white flex flex-col items-center justify-center space-y-6 text-2xl transform -translate-x-full transition-transform duration-300 z-50">
+    <a href="home.html" class="mobile-link" onclick="closeMenu()">Home</a>
+    <a href="form.html" class="mobile-link" onclick="closeMenu()">Services</a>
+    <a href="about.html" class="mobile-link" onclick="closeMenu()">About</a>
+    <a href="history.html" class="mobile-link" onclick="closeMenu()">History</a>
+    <!-- Mobile Login/Signup or Logout button, dynamically rendered -->
+    <div id="mobileAuthButton">
+      <!-- This will be populated via JavaScript -->
+    </div>
+    <button class="close-btn" onclick="closeMenu()">✕</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 bg-gradient-to-b from-green-800 to-green-600">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6" data-aos="fade-up">Smart Crop Recommendations with AI</h1>
+      <p class="text-xl text-white mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Get personalized crop recommendations based on your soil conditions and climate data powered by artificial intelligence.</p>
+      <div data-aos="fade-up" data-aos-delay="400">
+        <a href="form.html" class="bg-yellow-400 text-green-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors inline-block">Get Started</a>
+      </div>
+
+        <!-- Full-Width Carousel Section -->
+<section class="mt-16 w-full">
+  <div id="carouselExampleIndicators" class="relative w-full mx-auto shadow-lg overflow-hidden" data-te-carousel-init data-te-carousel-slide>
+    <!-- Slide 1 -->
+<div class="relative float-left w-full transition-opacity duration-700 ease-in-out opacity-100" data-te-carousel-item>
+  <img src="https://images.unsplash.com/photo-1620200423727-8127f75d7f53?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+       class="block w-full h-[250px] md:h-[300px] lg:h-[500px] object-cover"
+       alt="Smart Agriculture" />
+
+  <!-- Text Overlay with 3D Effect -->
+  <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 px-4 py-2 text-center rounded-lg">
+    <h3 class="text-2xl md:text-3xl font-bold text-white relative uppercase tracking-wide"
+        style="text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(255, 255, 255, 0.2);">
+      Smart Agriculture
+    </h3>
+    <p class="text-lg md:text-xl font-semibold text-gray-200 mt-2"
+       style="text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);">
+      Harness technology for sustainable farming.
+    </p>
+  </div>
+</div>
+
+      <!-- Slide 2 -->
+<div class="relative float-left w-full transition-opacity duration-700 ease-in-out opacity-100" data-te-carousel-item>
+   <img src="https://wallpapers.com/images/high/farmers-watering-the-plants-bng480tv17mr0d2f.webp"
+       class="block w-full h-[250px] md:h-[300px] lg:h-[500px] object-cover"
+       alt="Optimized Crop Growth" />
+
+  <!-- Text Overlay with 3D Effect -->
+    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 px-4 py-2 text-center rounded-lg">
+    <h3 class="text-2xl md:text-3xl font-bold text-white relative uppercase tracking-wide"
+        style="text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(255, 255, 255, 0.2);">
+      Optimized Crop Growth
+    </h3>
+    <p class="text-lg md:text-xl font-semibold text-gray-200 mt-2"
+       style="text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);">
+      Maximize yield with AI-driven insights.
+    </p>
+  </div>
+</div>
+
+<!-- Slide 3 -->
+<div class="relative float-left w-full transition-opacity duration-700 ease-in-out opacity-0 hidden" data-te-carousel-item>
+  <img src="https://images.unsplash.com/photo-1594771804886-a933bb2d609b?q=80&w=1482&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+       class="block w-full h-[250px] md:h-[300px] lg:h-[500px] object-cover"
+       alt="AI in Farming" />
+
+  <!-- Text Overlay with 3D Effect -->
+    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 px-4 py-2 text-center rounded-lg">
+    <h3 class="text-2xl md:text-3xl font-bold text-white relative uppercase tracking-wide"
+        style="text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(255, 255, 255, 0.2);">
+      AI in Farming
+    </h3>
+    <p class="text-lg md:text-xl font-semibold text-gray-200 mt-2"
+       style="text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);">
+      AI-powered analytics for smarter farming.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Navigation Buttons -->
+    <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-4 text-white rounded-full hover:bg-opacity-70 transition">
+      ❮
+    </button>
+    <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-4 text-white rounded-full hover:bg-opacity-70 transition">
+      ❯
+    </button>
+
+    <!-- Dots/Indicators -->
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+      <span class="dot w-4 h-4 bg-white rounded-full opacity-50 hover:opacity-100 transition" data-index="0"></span>
+      <span class="dot w-4 h-4 bg-white rounded-full opacity-50 hover:opacity-100 transition" data-index="1"></span>
+      <span class="dot w-4 h-4 bg-white rounded-full opacity-50 hover:opacity-100 transition" data-index="2"></span>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+  </section>
+
+
+  <!-- Features Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Features That Make Us Special</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-green-600 text-4xl mb-4">🌾</div>
+          <h3 class="text-xl font-semibold mb-2">AI-Powered Recommendations</h3>
+          <p class="text-gray-600">Our advanced AI analyzes multiple parameters to suggest the most suitable crops for your soil and climate conditions.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="400">
+          <div class="text-green-600 text-4xl mb-4">📊</div>
+          <h3 class="text-xl font-semibold mb-2">Detailed Analytics</h3>
+          <p class="text-gray-600">Track your historical data and gain insights into crop patterns and optimization opportunities.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="600">
+          <div class="text-green-600 text-4xl mb-4">📱</div>
+          <h3 class="text-xl font-semibold mb-2">Mobile Friendly</h3>
+          <p class="text-gray-600">Access your recommendations anywhere, whether you're in the field or at home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">How It Works</h2>
+
+      <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+          <img src="https://media.istockphoto.com/id/1223251927/vector/concept-of-smart-farm-hand-with-phone-on-a-background-the-field-smart-farming-tech-with.jpg?s=1024x1024&w=is&k=20&c=mnRmLJCbyOeTDaQCQPzn9p1jn_8bCKQxEYAs76VxHtA=" alt="Soil Testing" class="rounded-lg shadow-lg">
+        </div>
+
+        <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+          <ol class="space-y-6">
+            <li class="flex items-start">
+              <span class="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">1</span>
+              <div>
+                <h3 class="font-semibold text-xl mb-1">Enter Your Soil Data</h3>
+                <p class="text-gray-600">Input your soil's NPK values, pH level, and other parameters collected from soil testing.</p>
+              </div>
+            </li>
+
+            <li class="flex items-start">
+              <span class="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">2</span>
+              <div>
+                <h3 class="font-semibold text-xl mb-1">Add Climate Information</h3>
+                <p class="text-gray-600">Provide details about temperature, humidity, and rainfall in your region.</p>
+              </div>
+            </li>
+
+            <li class="flex items-start">
+              <span class="bg-green-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">3</span>
+              <div>
+                <h3 class="font-semibold text-xl mb-1">Get Recommendations</h3>
+                <p class="text-gray-600">Our AI will process your data and recommend the most suitable crops for your specific conditions.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">What Farmers Say</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center mb-4">
+            <div class="bg-green-100 text-green-800 rounded-full w-12 h-12 flex items-center justify-center mr-4">RS</div>
+            <div>
+              <h3 class="font-semibold">Riya Sharma</h3>
+              <p class="text-gray-600 text-sm">Pune</p>
+            </div>
+          </div>
+          <p class="text-gray-700">"AgroInsight helped me switch to soybean farming, increasing my yield by 30% compared to last season. The recommendations were spot on!"</p>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="400">
+          <div class="flex items-center mb-4">
+            <div class="bg-green-100 text-green-800 rounded-full w-12 h-12 flex items-center justify-center mr-4">AM</div>
+            <div>
+              <h3 class="font-semibold">Aarav Mehta</h3>
+              <p class="text-gray-600 text-sm">Mumbai</p>
+            </div>
+          </div>
+          <p class="text-gray-700">"I was skeptical at first, but after using AgroInsight for a year, I've optimized my crop rotation and improved soil health significantly."</p>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="600">
+          <div class="flex items-center mb-4">
+            <div class="bg-green-100 text-green-800 rounded-full w-12 h-12 flex items-center justify-center mr-4">VK</div>
+            <div>
+              <h3 class="font-semibold">Vikram Khanna</h3>
+              <p class="text-gray-600 text-sm">Hyderabad</p>
+            </div>
+          </div>
+          <p class="text-gray-700">"The detailed analytics have helped me understand my farm better. I now make data-driven decisions that have boosted my profits."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-green-800 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Ready to Optimize Your Farming?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Join thousands of farmers across India who are using AgroInsight to make smarter farming decisions.</p>
+      <div data-aos="fade-up" data-aos-delay="400" id="ctaButtonContainer">
+        <!-- CTA button will be populated dynamically via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white p-6">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h2 class="text-lg font-bold mb-2">AgroInsight</h2>
+        <p>Empowering farmers with AI-driven insights for better crop decisions.</p>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Contact Us</h2>
+        <ul>
+          <li>📍 Bengaluru, India</li>
+          <li>📞 +91 97172 31599</li>
+          <li>📧 Siyona@agroinsight.com</li>
+          <li>📧 Vaibhav@agroinsight.com</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Quick Links</h2>
+        <ul>
+          <li><a href="home.html" class="hover:text-yellow-400 transition-colors">Home</a></li>
+          <li><a href="form.html" class="hover:text-yellow-400 transition-colors">Get Recommendation</a></li>
+          <li><a href="about.html" class="hover:text-yellow-400 transition-colors">About Us</a></li>
+          <li><a href="history.html" class="hover:text-yellow-400 transition-colors">Recommendation History</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center mt-6 border-t border-green-700 pt-4">
+      <p>&copy; 2025 AgroInsight. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Login Success Modal -->
+  <div id="loginSuccessModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Welcome Back!</h2>
+        <p class="text-gray-600 mb-6">You have successfully logged in to your AgroInsight account.</p>
+        <button onclick="closeLoginModal()" class="bg-green-800 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Success Modal -->
+  <div id="signupSuccessModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Account Created!</h2>
+        <p class="text-gray-600 mb-6">Your AgroInsight account has been successfully created. You can now access all our features.</p>
+        <button onclick="closeSignupModal()" class="bg-green-800 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">Get Started</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Styles -->
+  <style>
+    /* Navbar Links */
+    .nav-link {
+      position: relative;
+      color: white;
+      transition: color 0.3s;
+    }
+    .nav-link:hover {
+      color: #facc15;
+    }
+
+    /* Dropdown */
+    .dropdown-link {
+      padding: 10px 16px;
+      display: block;
+      text-align: left;
+      transition: background 0.3s ease;
+    }
+    .dropdown-link:hover {
+      background: #facc15;
+      color: white;
+    }
+
+    /* Full-Screen Mobile Menu */
+    .mobile-link {
+      font-size: 1.8rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .mobile-link:hover {
+      color: #facc15;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 3rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      width: 30px;
+      height: 3px;
+      background: white;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .hamburger::before,
+    .hamburger::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 3px;
+      background: white;
+      transition: all 0.3s;
+    }
+    .hamburger::before {
+      top: -8px;
+    }
+    .hamburger::after {
+      top: 8px;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- JavaScript -->
+  <script>
+    // Check if user is logged in
+    function isUserLoggedIn() {
+      return localStorage.getItem('userId') !== null;
+    }
+
+    // Initialize AOS animations
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+      
+      // Update UI elements based on login status
+      updateAuthUI();
+    });
+
+    // Update all UI elements that depend on login status
+    function updateAuthUI() {
+      const isLoggedIn = isUserLoggedIn();
+      
+      // Update navbar button
+      const authButtonContainer = document.getElementById('authButton');
+      if (isLoggedIn) {
+        authButtonContainer.innerHTML = `
+          <a href="#" onclick="logout()" class="bg-yellow-400 text-green-800 px-4 py-2 rounded-lg hover:bg-yellow-300 transition-colors">Logout</a>
+        `;
+      } else {
+        authButtonContainer.innerHTML = `
+          <a href="login.html" class="bg-yellow-400 text-green-800 px-4 py-2 rounded-lg hover:bg-yellow-300 transition-colors">Login/Signup</a>
+        `;
+      }
+      
+      // Update mobile menu button
+      const mobileAuthButton = document.getElementById('mobileAuthButton');
+      if (isLoggedIn) {
+        mobileAuthButton.innerHTML = `
+          <a href="#" onclick="logout(); closeMenu();" class="bg-yellow-400 text-green-800 px-6 py-2 rounded-lg">Logout</a>
+        `;
+      } else {
+        mobileAuthButton.innerHTML = `
+          <a href="login.html" class="bg-yellow-400 text-green-800 px-6 py-2 rounded-lg" onclick="closeMenu()">Login/Signup</a>
+        `;
+      }
+      
+      // Update CTA button
+      const ctaContainer = document.getElementById('ctaButtonContainer');
+      if (isLoggedIn) {
+        ctaContainer.innerHTML = `
+          <a href="form.html" class="bg-yellow-400 text-green-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors inline-block">Get Services</a>
+        `;
+      } else {
+        ctaContainer.innerHTML = `
+          <a href="login.html" class="bg-yellow-400 text-green-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors inline-block">Create Free Account</a>
+        `;
+      }
+    }
+
+    // Logout function
+    // function logout() {
+    //   localStorage.removeItem('userId');
+    //   updateAuthUI();
+    //   alert('You have been logged out successfully!');
+    // }
+
+    function logout() {
+  localStorage.removeItem("userId");
+  localStorage.removeItem("userName");
+  updateAuthUI();
+  Swal.fire({
+    title: "Logged Out!",
+    text: "You have been successfully logged out.",
+    icon: "success",
+    confirmButtonColor: "#15803d"
+  }).then(() => {
+    window.location.href = "home.html";
+  });
+}
+
+    // Mobile menu functionality
+    const menu = document.getElementById("mobile-menu");
+    const menuBtn = document.getElementById("menu-btn");
+
+    menuBtn.addEventListener("click", () => {
+      menu.classList.toggle("-translate-x-full");
+    });
+
+    function closeMenu() {
+      menu.classList.add("-translate-x-full");
+    }
+
+    // Modal functionality
+    function showLoginModal() {
+      document.getElementById('loginSuccessModal').classList.remove('hidden');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginSuccessModal').classList.add('hidden');
+    }
+
+    function showSignupModal() {
+      document.getElementById('signupSuccessModal').classList.remove('hidden');
+    }
+
+    function closeSignupModal() {
+      document.getElementById('signupSuccessModal').classList.add('hidden');
+    }
+
+    // JavaScript for Carousel
+    document.addEventListener("DOMContentLoaded", function () {
+      let currentIndex = 0;
+      const slides = document.querySelectorAll("[data-te-carousel-item]");
+      const totalSlides = slides.length;
+      const dots = document.querySelectorAll(".dot");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("opacity-100", i === index);
+          slide.classList.toggle("opacity-0", i !== index);
+          slide.classList.toggle("hidden", i !== index);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("bg-yellow-300", i === index);
+          dot.classList.toggle("bg-white", i !== index);
+        });
+
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        let newIndex = (currentIndex + 1) % totalSlides;
+        showSlide(newIndex);
+      }
+
+      function prevSlide() {
+        let newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(newIndex);
+      }
+
+      // Auto-slide every 4 seconds
+      setInterval(nextSlide, 4000);
+
+      // Event listeners for buttons
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+
+      // Event listeners for dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => showSlide(index));
+      });
+
+      // Initial slide display
+      showSlide(currentIndex);
+    });
+  </script>
+</body>
+</html>

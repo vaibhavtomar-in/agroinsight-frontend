@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Recommendation System</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #2d6a4f, #40916c);
+    }
+    .input-field {
+      @apply w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300;
+    }
+    .submit-btn {
+      @apply bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300;
+    }
+    .container-card {
+      @apply bg-white shadow-md rounded-lg p-8 max-w-4xl mx-auto mt-8 transition duration-300 transform hover:scale-105;
+    }
+
+    /* Enhanced Input Animations */
+    .input-animated {
+      transition: all 0.3s ease;
+    }
+    .input-animated:focus {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Floating Labels */
+    .floating-label {
+      position: relative;
+    }
+    .floating-label input {
+      height: 60px;
+      padding-top: 20px;
+    }
+    .floating-label label {
+      position: absolute;
+      top: 0;
+      left: 12px;
+      height: 100%;
+      padding: 1rem 0.75rem;
+      pointer-events: none;
+      transform-origin: 0 0;
+      transition: opacity .15s ease-in-out, transform .15s ease-in-out;
+    }
+    .floating-label input:focus ~ label,
+    .floating-label input:not(:placeholder-shown) ~ label {
+      transform: translateY(-10px) scale(0.85);
+      color: #2d6a4f;
+    }
+
+    /* Form Group Animations */
+    .form-group {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .form-group.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Success Animation */
+    @keyframes successPulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .success-pulse {
+      animation: successPulse 1.5s infinite;
+    }
+
+    /* Range Slider Styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #e0e0e0;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #2d6a4f;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      background: #1a4731;
+      transform: scale(1.2);
+    }
+
+    /* Tooltip Styling */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 200px;
+      background-color: #2d6a4f;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-green-800 transition-all duration-300 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <!-- Logo -->
+      <a href="home.html" class="text-white text-3xl font-bold tracking-wide flex items-center">
+        <span class="text-yellow-400 mr-2">🌱</span>
+        Agro-Insight
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex space-x-8 text-lg font-medium">
+        <li><a href="home.html" class="text-white hover:text-yellow-400 transition-colors">Home</a></li>
+
+        <li><a href="index.html" class="text-white hover:text-yellow-400 transition-colors">Services</a></li>
+        <li><a href="about.html" class="text-white hover:text-yellow-400 transition-colors">About</a></li>
+        <li><a href="history.html" class="bg-yellow-400 text-green-800 px-6 py-2 rounded-lg" >User Profile</a></li>
+
+      </ul>
+
+      <!-- Hamburger Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <div class="hamburger"></div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Full-Screen Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-green-800 text-white flex flex-col items-center justify-center space-y-6 text-2xl transform -translate-x-full transition-transform duration-300 z-50">
+    <a href="home.html" class="mobile-link" onclick="closeMenu()">Home</a>
+    <a href="about.html" class="mobile-link" onclick="closeMenu()">About</a>
+
+    <a href="history.html" class="mobile-link" onclick="closeMenu()">History</a>
+    <a href="index.html" class="mobile-link" onclick="closeMenu()">Services</a>
+  </div>
+
+<!-- Styles -->
+<style>
+  /* Navbar Links */
+  .nav-link {
+    position: relative;
+    color: #333;
+    transition: color 0.3s;
+  }
+  .nav-link:hover {
+    color: #facc15;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #2d6a4f;
+    transition: width 0.3s;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Dropdown */
+  .dropdown-link {
+    padding: 10px 16px;
+    display: block;
+    text-align: left;
+    transition: background 0.3s ease;
+  }
+  .dropdown-link:hover {
+    background: #facc15;
+    color: white;
+  }
+
+  /* Full-Screen Mobile Menu */
+  .mobile-link {
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .mobile-link:hover {
+    color: #facc15;
+  }
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 3rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* Hamburger Menu */
+  .hamburger {
+    width: 30px;
+    height: 3px;
+    background: black;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background: black;
+    transition: all 0.3s;
+  }
+  .hamburger::before {
+    top: -8px;
+  }
+  .hamburger::after {
+    top: 8px;
+  }
+
+  /* Scroll Effect */
+  .scrolled {
+    background: #355E3B;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .scrolled .nav-link {
+    color: white;
+  }
+  .scrolled .hamburger,
+  .scrolled .hamburger::before,
+  .scrolled .hamburger::after {
+    background: white;
+  }
+  .scrolled a.text-gray-900 {
+    color: white;
+  }
+
+  /* Error Shake Animation */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+  .shake {
+    animation: shake 0.5s;
+  }
+</style>
+
+<!-- Hero Section -->
+<div class="container mx-auto py-12 text-center animate__animated animate__fadeIn">
+  <br><br>
+  <br><br>
+  <h1 class="text-5xl font-bold text-green-900">🌱 Crop Recommendation System</h1>
+  <p class="text-lg text-gray-600 mt-4">Enter your field details to get AI-powered crop recommendations.</p>
+  <div class="mt-8 flex justify-center">
+    <button id="scroll-to-form" class="bg-green-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-700 transition duration-300 flex items-center">
+      Get Started
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Form Section -->
+<div id="form-section" class="container mx-auto py-12">
+  <form id="crop-form" action="/predict" method="POST" class="bg-white shadow-lg rounded-lg p-8 mt-8 max-w-4xl mx-auto transition duration-500 transform hover:shadow-xl">
+
+    <!-- Progress Bar -->
+    <div class="mb-8">
+      <div class="w-full bg-gray-200 rounded-full h-2.5">
+        <div id="progress-bar" class="bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
+      </div>
+      <div class="flex justify-between mt-2 text-sm text-gray-600">
+        <span>Start</span>
+        <span>Nutrient Details</span>
+        <span>Environmental Factors</span>
+        <span>Complete</span>
+      </div>
+    </div>
+
+    <!-- Nutrition Information Section -->
+    <div id="step1" class="form-group visible">
+      <h3 class="text-2xl font-bold text-green-800 mb-6">Soil Nutrient Information</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="floating-label tooltip">
+          <input type="number" id="Nitrogen" name="Nitrogen" placeholder=" " class="input-field input-animated w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required min="0" max="150">
+          <label for="Nitrogen" class="text-gray-700">Nitrogen (N)</label>
+          <div class="mt-2 text-sm text-gray-600" id="nitrogen-value">0 kg/ha</div>
+          <input type="range" min="0" max="150" value="0" class="slider mt-1" id="nitrogen-slider">
+          <span class="tooltip-text">Recommended range: 20-120 kg/ha</span>
+        </div>
+        <div class="floating-label tooltip">
+          <input type="number" id="Phosporus" name="Phosporus" placeholder=" " class="input-field input-animated w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required min="0" max="150">
+          <label for="Phosporus" class="text-gray-700">Phosphorus (P)</label>
+          <div class="mt-2 text-sm text-gray-600" id="phosphorus-value">0 kg/ha</div>
+          <input type="range" min="0" max="150" value="0" class="slider mt-1" id="phosphorus-slider">
+          <span class="tooltip-text">Recommended range: 10-100 kg/ha</span>
+        </div>
+        <div class="floating-label tooltip">
+          <input type="number" id="Potassium" name="Potassium" placeholder=" " class="input-field input-animated w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required min="0" max="200">
+          <label for="Potassium" class="text-gray-700">Potassium (K)</label>
+          <div class="mt-2 text-sm text-gray-600" id="potassium-value">0 kg/ha</div>
+          <input type="range" min="0" max="200" value="0" class="slider mt-1" id="potassium-slider">
+          <span class="tooltip-text">Recommended range: 15-150 kg/ha</span>
+        </div>
+      </div>
+      <div class="text-right mt-8">
+        <button type="button" id="next-step1" class="bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300">
+          Next <span class="ml-2">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Environmental Factors Section -->
+    <div id="step2" class="form-group hidden">
+      <h3 class="text-2xl font-bold text-green-800 mb-6">Environmental Factors</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="floating-label tooltip">
+          <input type="number" step="0.01" id="Temperature" name="Temperature" placeholder=" " class="input-field input-animated w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required min="0" max="50">
+          <label for="Temperature" class="text-gray-700">Temperature (°C)</label>
+          <div class="mt-2 text-sm text-gray-600" id="temperature-value">0 °C</div>
+          <input type="range" min="0" max="50" value="0" step="0.1" class="slider mt-1" id="temperature-slider">
+          <span class="tooltip-text">Common range: 10-35 °C</span>
+        </div>
+        <div class="floating-label tooltip">
+          <input type="number" step="0.01" id="Humidity" name="Humidity" placeholder=" " class="input-field input-animated w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required min="0" max="100">
+          <label for="Humidity" class="text-gray-700">Humidity (%)</label>
+          <div class="mt-2 text-sm text-gray-600" id="humidity-value">0%</div>
+          <input type="range" min="0" max="100" value="0" step="0.1" class="slider mt-1" id="humidity-slider">
+          <span class="tooltip-text">Common range: 30-90%</span>
+        </div>
+        <div class="floating-label tooltip">
+          <input type="number" id="Ph" name="Ph" step="0.01" min="0" max="14" placeholder=" " class="input-field input-animated w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+          <label for="Ph" class="text-gray-700">pH Level</label>
+          <div class="mt-2 text-sm text-gray-600" id="ph-value">0</div>
+          <input type="range" min="0" max="14" value="7" step="0.1" class="slider mt-1" id="ph-slider">
+          <span class="tooltip-text">Most crops prefer pH between 5.5 and 7.5</span>
+          <small class="text-red-500 hidden" id="pH-error">pH value must be between 0 and 14.</small>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <div class="floating-label tooltip">
+          <input type="number" step="0.01" id="Rainfall" name="Rainfall" placeholder=" " class="input-field input-animated w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required min="0" max="300">
+          <label for="Rainfall" class="text-gray-700">Rainfall (mm)</label>
+          <div class="mt-2 text-sm text-gray-600" id="rainfall-value">0 mm</div>
+          <input type="range" min="0" max="300" value="0" step="1" class="slider mt-1" id="rainfall-slider">
+          <span class="tooltip-text">Common range: 50-250 mm</span>
+        </div>
+      </div>
+
+      <div class="flex justify-between mt-8">
+        <button type="button" id="prev-step2" class="bg-gray-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-300">
+          <span class="mr-2">←</span> Previous
+        </button>
+        <button type="submit" id="submit-btn" class="bg-green-700 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300 flex items-center">
+          <span>Get Recommendation</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Result Section -->
+{% if result %}
+<div class="container mx-auto py-12 animate__animated animate__fadeInUp">
+  <h2 class="text-3xl font-bold text-center text-green-800">Recommended Crop</h2>
+  <div class="bg-white shadow-md rounded-lg p-8 mt-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center success-pulse">
+    <img src="img.jpg" alt="Crop Image" class="w-40 h-40 rounded-lg object-cover mb-6 md:mb-0 md:mr-6">
+    <div>
+      <p class="text-gray-700 text-lg"><span class="font-bold text-green-800">Crop Name:</span> {{ result }}</p>
+      <p class="text-gray-600 mt-2">Based on your soil and environmental conditions, we recommend this crop for optimal yield. Here are some key benefits:</p>
+      <ul class="list-disc ml-5 mt-2 text-gray-600">
+        <li>Suited for your specific soil nutrient profile</li>
+        <li>Adapted to your local climate conditions</li>
+        <li>Expected to provide optimal yield based on your inputs</li>
+      </ul>
+      <div class="mt-4">
+        <a href="#" class="text-green-700 hover:text-green-800 font-medium">
+          Learn more about growing {{ result }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+ <!-- Footer -->
+  <footer class="bg-green-800 text-white p-6">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h2 class="text-lg font-bold mb-2">AgroInsight</h2>
+        <p>Empowering farmers with AI-driven insights for better crop decisions.</p>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Contact Us</h2>
+        <ul>
+          <li>📍 Bengaluru, India</li>
+          <li>📞 +91 97172 31599</li>
+          <li>📧 Siyona@agroinsight.com</li>
+          <li>📧 Vaibhav@agroinsight.com</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Quick Links</h2>
+        <ul>
+          <li><a href="home.html" class="hover:text-yellow-400 transition-colors">Home</a></li>
+          <li><a href="index.html" class="hover:text-yellow-400 transition-colors">Get Recommendation</a></li>
+          <li><a href="about.html" class="hover:text-yellow-400 transition-colors">About Us</a></li>
+          <li><a href="history.html" class="hover:text-yellow-400 transition-colors">Recommendation History</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center mt-6 border-t border-green-700 pt-4">
+      <p>&copy; 2025 AgroInsight. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+<script>
+  // Menu functionality
+  const menu = document.getElementById("mobile-menu");
+  const menuBtn = document.getElementById("menu-btn");
+
+  menuBtn.addEventListener("click", () => {
+    menu.classList.toggle("-translate-x-full");
+  });
+
+  function closeMenu() {
+    menu.classList.add("-translate-x-full");
+  }
+
+  // Scroll Effect for Navbar
+  window.addEventListener("scroll", function() {
+    const navbar = document.getElementById("navbar");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+
+  // Smooth scroll to form
+  document.getElementById("scroll-to-form").addEventListener("click", function() {
+    document.getElementById("form-section").scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Staggered form group animation on load
+  document.addEventListener("DOMContentLoaded", function() {
+    const formGroups = document.querySelectorAll(".form-group");
+    const timeline = gsap.timeline();
+
+    formGroups.forEach((formGroup, index) => {
+      gsap.fromTo(
+        formGroup,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          delay: index * 0.2,
+          ease: "power2.out"
+        }
+      );
+    });
+
+    // Initialize sliders
+    setupSliders();
+  });
+
+  // Multi-step form functionality
+  const step1 = document.getElementById("step1");
+  const step2 = document.getElementById("step2");
+  const nextStep1 = document.getElementById("next-step1");
+  const prevStep2 = document.getElementById("prev-step2");
+  const progressBar = document.getElementById("progress-bar");
+
+  nextStep1.addEventListener("click", function() {
+    // Validate first step
+    const nitrogen = document.getElementById("Nitrogen");
+    const phosphorus = document.getElementById("Phosporus");
+    const potassium = document.getElementById("Potassium");
+
+    if (!nitrogen.value || !phosphorus.value || !potassium.value) {
+      shakeInvalidFields([nitrogen, phosphorus, potassium]);
+      return;
+    }
+
+    // Proceed to next step
+    step1.classList.add("hidden");
+    step1.classList.remove("visible");
+    step2.classList.remove("hidden");
+    gsap.fromTo(
+      step2,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+    );
+    progressBar.style.width = "66%";
+  });
+
+  prevStep2.addEventListener("click", function() {
+    step2.classList.add("hidden");
+    step1.classList.remove("hidden");
+    step1.classList.add("visible");
+    progressBar.style.width = "33%";
+  });
+
+  // Form submission with validation
+  document.getElementById("crop-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Validate all fields
+    const allInputs = this.querySelectorAll("input[required]");
+    let isValid = true;
+    let invalidFields = [];
+
+    allInputs.forEach(input => {
+      if (!input.value) {
+        isValid = false;
+        invalidFields.push(input);
+      }
+
+      // Specific validation for pH
+      if (input.id === "Ph") {
+        const phValue = parseFloat(input.value);
+        if (phValue < 0 || phValue > 14) {
+          isValid = false;
+          invalidFields.push(input);
+          document.getElementById("pH-error").classList.remove("hidden");
+        } else {
+          document.getElementById("pH-error").classList.add("hidden");
+        }
+      }
+    });
+
+    if (!isValid) {
+      shakeInvalidFields(invalidFields);
+      return;
+    }
+
+    // Show loading animation
+    const submitBtn = document.getElementById("submit-btn");
+    submitBtn.innerHTML = `
+      <span>Processing</span>
+      <svg class="animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    `;
+
+    progressBar.style.width = "100%";
+
+    // Submit the form after a short delay
+    setTimeout(() => {
+      this.submit();
+    }, 1000);
+  });
+
+  // Input validation helper
+  function shakeInvalidFields(fields) {
+    fields.forEach(field => {
+      if (!field.value) {
+        field.classList.add("border-red-500", "shake");
+        setTimeout(() => {
+          field.classList.remove("shake");
+        }, 500);
+      } else {
+        field.classList.remove("border-red-500");
+      }
+    });
+  }
+
+  // Range slider functionality
+  function setupSliders() {
+    // Nitrogen slider
+    const nitrogenSlider = document.getElementById("nitrogen-slider");
+    const nitrogenInput = document.getElementById("Nitrogen");
+    const nitrogenValue = document.getElementById("nitrogen-value");
+
+    nitrogenSlider.addEventListener("input", function() {
+      nitrogenInput.value = this.value;
+      nitrogenValue.textContent = this.value + " kg/ha";
+    });
+
+    nitrogenInput.addEventListener("input", function() {
+      nitrogenSlider.value = this.value;
+      nitrogenValue.textContent = this.value + " kg/ha";
+    });
+
+    // Phosphorus slider
+    const phosphorusSlider = document.getElementById("phosphorus-slider");
+    const phosphorusInput = document.getElementById("Phosporus");
+    const phosphorusValue = document.getElementById("phosphorus-value");
+
+    phosphorusSlider.addEventListener("input", function() {
+      phosphorusInput.value = this.value;
+      phosphorusValue.textContent = this.value + " kg/ha";
+    });
+
+    phosphorusInput.addEventListener("input", function() {
+      phosphorusSlider.value = this.value;
+      phosphorusValue.textContent = this.value + " kg/ha";
+    });
+
+    // Potassium slider
+    const potassiumSlider = document.getElementById("potassium-slider");
+    const potassiumInput = document.getElementById("Potassium");
+    const potassiumValue = document.getElementById("potassium-value");
+
+    potassiumSlider.addEventListener("input", function() {
+      potassiumInput.value = this.value;
+      potassiumValue.textContent = this.value + " kg/ha";
+    });
+
+    potassiumInput.addEventListener("input", function() {
+      potassiumSlider.value = this.value;
+      potassiumValue.textContent = this.value + " kg/ha";
+    });
+
+    // Temperature slider
+    const temperatureSlider = document.getElementById("temperature-slider");
+    const temperatureInput = document.getElementById("Temperature");
+    const temperatureValue = document.getElementById("temperature-value");
+
+    temperatureSlider.addEventListener("input", function() {
+      temperatureInput.value = this.value;
+      temperatureValue.textContent = this.value + " °C";
+    });
+
+    temperatureInput.addEventListener("input", function() {
+      temperatureSlider.value = this.value;
+      temperatureValue.textContent = this.value + " °C";
+    });
+
+    // Humidity slider
+    const humiditySlider = document.getElementById("humidity-slider");
+    const humidityInput = document.getElementById("Humidity");
+    const humidityValue = document.getElementById("humidity-value");
+
+    humiditySlider.addEventListener("input", function() {
+      humidityInput.value = this.value;
+      humidityValue.textContent = this.value + "%";
+    });
+
+    humidityInput.addEventListener("input", function() {
+      humiditySlider.value = this.value;
+      humidityValue.textContent = this.value + "%";
+    });
+
+    // pH slider
+    const phSlider = document.getElementById("ph-slider");
+    const phInput = document.getElementById("Ph");
+    const phValue = document.getElementById("ph-value");
+
+    phSlider.addEventListener("input", function() {
+      phInput.value = this.value;
+      phValue.textContent = this.value;
+
+      // Validate pH range
+      if (this.value < 0 || this.value > 14) {
+        document.getElementById("pH-error").classList.remove("hidden");
+      } else {
+        document.getElementById("pH-error").classList.add("hidden");
+      }
+    });
+
+    phInput.addEventListener("input", function() {
+      phSlider.value = this.value;
+      phValue.textContent = this.value;
+
+      // Validate pH range
+      if (this.value < 0 || this.value > 14) {
+        document.getElementById("pH-error").classList.remove("hidden");
+      } else {
+        document.getElementById("pH-error").classList.add("hidden");
+      }
+    });
+
+    // Rainfall slider
+    const rainfallSlider = document.getElementById("rainfall-slider");
+    const rainfallInput = document.getElementById("Rainfall");
+    const rainfallValue = document.getElementById("rainfall-value");
+
+    rainfallSlider.addEventListener("input", function() {
+      rainfallInput.value = this.value;
+      rainfallValue.textContent = this.value + " mm";
+    });
+
+    rainfallInput.addEventListener("input", function() {
+      rainfallSlider.value = this.value;
+      rainfallValue.textContent = this.value + " mm";
+    });
+  }
+
+  // Apply animations to elements when they come into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.container-card, .submit-btn, h1, h2').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

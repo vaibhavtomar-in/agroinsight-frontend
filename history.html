@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Recommendation History</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-green-800 transition-all duration-300 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <!-- Logo -->
+      <a href="home.html" class="text-white text-3xl font-bold tracking-wide flex items-center">
+        <span class="text-yellow-400 mr-2">🌱</span>
+        Agro-Insight
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex space-x-8 text-lg font-medium">
+        <li><a href="home.html" class="text-white hover:text-yellow-400 transition-colors">Home</a></li>
+        <li><a href="index.html" class="text-white hover:text-yellow-400 transition-colors">Services</a></li>
+        <li><a href="about.html" class="text-white hover:text-yellow-400 transition-colors">About</a></li>
+        <li><a href="history.html" class="text-white hover:text-yellow-400 transition-colors">History</a></li>
+        <li id="authButton"></li>
+      </ul>
+
+      <!-- Hamburger Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <div class="hamburger"></div>
+      </button>
+    </div>
+  </nav>
+
+  <h2 id="userGreeting"></h2>
+
+  <!-- Full-Screen Mobile Menu -->
+  <div id="mobile-menu"
+    class="fixed top-0 left-0 w-full h-screen bg-gray-900 text-white flex flex-col items-center justify-center space-y-6 text-2xl transform -translate-x-full transition-transform duration-300">
+    <a href="./home.html" class="mobile-link" onclick="closeMenu()">Home</a>
+    <a href="./about.html" class="mobile-link" onclick="closeMenu()">About</a>
+    <a href="./form.html" class="mobile-link" onclick="closeMenu()">Services</a>
+    <a href="./history.html" class="mobile-link" onclick="closeMenu()">History</a>
+    <a href="#" id="mobileAuthButton" class="mobile-link" onclick="handleAuthAction()">Login/Signup</a>
+    <button class="close-btn" onclick="closeMenu()">✕</button>
+  </div>
+
+  <!-- Styles -->
+  <style>
+    /* Navbar Links */
+    .nav-link {
+      position: relative;
+      color: #333;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #facc15;
+    }
+
+    .dropdown-link:hover {
+      background: #facc15;
+      color: white;
+    }
+
+    /* Full-Screen Mobile Menu */
+    .mobile-link {
+      font-size: 1.8rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .mobile-link:hover {
+      color: #facc15;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 3rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      width: 30px;
+      height: 3px;
+      background: white;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 3px;
+      background: white;
+      transition: all 0.3s;
+    }
+
+    .hamburger::before {
+      top: -8px;
+    }
+
+    .hamburger::after {
+      top: 8px;
+    }
+
+    /* Scroll Effect */
+    .scrolled {
+      background: #355E3B;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Dynamic table container height */
+    .table-container {
+      min-height: 200px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    
+    /* Blur effect */
+    .blur-content {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+    }
+    
+    /* Login overlay */
+    .login-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+    }
+  </style>
+
+  <br>
+  <br>
+  <br>
+
+  <!-- Content wrapper with conditionally applied blur -->
+  <div id="content-wrapper" class="relative">
+    <!-- Login overlay (shown when user is not logged in) -->
+    <div id="login-overlay" class="login-overlay hidden">
+      <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-green-800 mb-4">Access Required</h2>
+        <p class="text-gray-600 mb-6">Please log in to view your recommendation history</p>
+        <a href="login.html" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors inline-block">
+          Login Now
+        </a>
+      </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto mt-6 p-6 bg-white rounded-lg shadow-md">
+      <!-- User Info Section -->
+      <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+        <div class="text-center md:text-left">
+          <h2 class="text-2xl font-bold text-green-800 user-name"></h2>
+          <p class="text-gray-600 user-phone"></p>
+          <p class="text-gray-600 user-address"></p>
+          <p class="text-gray-600 user-recommendations"></p>
+        </div>
+      </div>
+      <!-- Search Bar -->
+      <input type="text" id="searchBox" placeholder="Search crop..."
+      class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600 mb-4">
+      <h2 class="text-center text-green-800 font-bold text-2xl mb-4">Recommendation History</h2>
+      <ul id="recommendationList" class="list-disc list-inside"></ul>
+      
+      <div class="table-container">
+        <table class="w-full border-collapse shadow-md" id="historyTable">
+          <thead>
+            <tr class="bg-green-800 text-white text-lg">
+              <th class="px-4 py-3 cursor-pointer" onclick="sortTable(0)">Date ⬍</th>
+              <th class="px-4 py-3">N</th>
+              <th class="px-4 py-3">P</th>
+              <th class="px-4 py-3">K</th>
+              <th class="px-4 py-3">Temperature (°C)</th>
+              <th class="px-4 py-3">Humidity (%)</th>
+              <th class="px-4 py-3">pH</th>
+              <th class="px-4 py-3">Rainfall (mm)</th>
+              <th class="px-4 py-3">Recommended Crop</th>
+            </tr>
+          </thead>
+          <tbody id="history-body" class="divide-y divide-gray-200">
+            <!-- Sample row for placeholder content when not logged in -->
+            <tr class="hover:bg-gray-100">
+              <td class="px-4 py-3">2025-03-20</td>
+              <td class="px-4 py-3">35</td>
+              <td class="px-4 py-3">50</td>
+              <td class="px-4 py-3">40</td>
+              <td class="px-4 py-3">25.3</td>
+              <td class="px-4 py-3">80</td>
+              <td class="px-4 py-3">6.5</td>
+              <td class="px-4 py-3">200</td>
+              <td class="px-4 py-3 font-bold text-green-700">Rice</td>
+            </tr>
+            <tr class="hover:bg-gray-100">
+              <td class="px-4 py-3">2025-03-15</td>
+              <td class="px-4 py-3">40</td>
+              <td class="px-4 py-3">45</td>
+              <td class="px-4 py-3">35</td>
+              <td class="px-4 py-3">22.1</td>
+              <td class="px-4 py-3">75</td>
+              <td class="px-4 py-3">7.2</td>
+              <td class="px-4 py-3">180</td>
+              <td class="px-4 py-3 font-bold text-green-700">Wheat</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart Section -->
+<div class="mt-6">
+  <div class="chart-container" style="position: relative; height: 300px; max-width: 600px; margin: 0 auto;">
+    <canvas id="cropChart"></canvas>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white p-6 mt-12">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h2 class="text-lg font-bold mb-2">AgroInsight</h2>
+        <p>Empowering farmers with AI-driven insights for better crop decisions.</p>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Contact Us</h2>
+        <ul>
+          <li>📍 Bengaluru, India</li>
+          <li>📞 +91 97172 31599</li>
+          <li>📧 Siyona@agroinsight.com</li>
+          <li>📧 Vaibhav@agroinsight.com</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Quick Links</h2>
+        <ul>
+          <li><a href="./home.html" class="hover:underline">Home</a></li>
+          <li><a href="./form.html" class="hover:underline">Get Recommendation</a></li>
+          <li><a href="./about.html" class="hover:underline">About Us</a></li>
+          <li><a href="./history.html" class="hover:underline">Recommendation History</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center mt-6 border-t border-white pt-4">
+      <p>&copy; 2025 AgroInsight. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src = "history.js"></script>
+</body>
+
+</html>

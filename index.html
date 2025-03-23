@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Signup | AgroInsight</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="app.js"></script>
+  <style>
+    /* Navbar Styling */
+    .navbar {
+      transition: all 0.3s ease-in-out;
+    }
+    .navbar.shrink {
+      padding: 0.5rem 1rem;
+      background-color: rgba(34, 197, 94, 0.95);
+    }
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger span {
+      background: white;
+      height: 3px;
+      width: 30px;
+      margin: 5px 0;
+      transition: all 0.3s ease;
+    }
+    .mobile-menu {
+      display: none;
+    }
+    /* Show Mobile Menu */
+    .mobile-menu.active {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center"
+      style="background: url('https://wallpapercave.com/wp/wp2073070.jpg') no-repeat center center fixed; background-size: cover;">
+
+   <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white transition-all duration-300 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+
+      <!-- Logo -->
+      <a href="./home.html" class="text-gray-900 text-3xl font-bold tracking-wide">Agro-Insight</a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex space-x-8 text-lg font-medium">
+        <li><a href="./home.html" class="nav-link">Home</a></li>
+        <li><a href="./about.html" class="nav-link">About</a></li>
+        <li class="relative group">
+          <a href="./form.html" class="nav-link">Services</a>
+
+        </li>
+        <li><a href="./history.html" class="nav-link">History</a></li>
+      </ul>
+
+      <!-- Hamburger Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <div class="hamburger"></div>
+      </button>
+
+    </div>
+  </nav>
+
+   <!-- Full-Screen Mobile Menu -->
+   <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-gray-900 text-white flex flex-col items-center justify-center space-y-6 text-2xl transform -translate-x-full transition-transform duration-300">
+    <a href="./home.html" class="mobile-link" onclick="closeMenu()">Home</a>
+    <a href="./about.html" class="mobile-link" onclick="closeMenu()">About</a>
+    <a href="./form.html" class="mobile-link" onclick="closeMenu()">Services</a>
+    <a href="./history.html" class="mobile-link" onclick="closeMenu()">History</a>
+    <button class="close-btn" onclick="closeMenu()">✕</button>
+  </div>
+
+<!-- Styles -->
+<style>
+  /* Navbar Links */
+  .nav-link {
+    position: relative;
+    color: #333;
+    transition: color 0.3s;
+  }
+  .nav-link:hover {
+    color: #facc15;
+  }
+
+  /* Dropdown */
+  .dropdown-link {
+    padding: 10px 16px;
+    display: block;
+    text-align: left;
+    transition: background 0.3s ease;
+  }
+  .dropdown-link:hover {
+    background: #facc15;
+    color: white;
+  }
+
+  /* Full-Screen Mobile Menu */
+  .mobile-link {
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .mobile-link:hover {
+    color: #facc15;
+  }
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 3rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* Hamburger Menu */
+  .hamburger {
+    width: 30px;
+    height: 3px;
+    background: black;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background: black;
+    transition: all 0.3s;
+  }
+  .hamburger::before {
+    top: -8px;
+  }
+  .hamburger::after {
+    top: 8px;
+  }
+
+  /* Scroll Effect */
+  .scrolled {
+    background: #355E3B;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+  const menu = document.getElementById("mobile-menu");
+  const menuBtn = document.getElementById("menu-btn");
+
+  menuBtn.addEventListener("click", () => {
+    menu.classList.toggle("-translate-x-full");
+  });
+
+  function closeMenu() {
+    menu.classList.add("-translate-x-full");
+  }
+
+  // Scroll Effect for Navbar
+  window.addEventListener("scroll", function() {
+    const navbar = document.getElementById("navbar");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+</script>
+
+
+  <!-- Main Container -->
+  <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8 mt-16">
+    <!-- Toggle Buttons -->
+    <div class="flex justify-around mb-6">
+      <button id="showLogin" class="text-green-800 font-bold border-b-2 border-green-800 px-4 py-2 transition duration-300">Login</button>
+      <button id="showSignup" class="text-gray-600 px-4 py-2 hover:text-green-800 transition duration-300">Sign Up</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h2 class="text-2xl font-bold text-green-800 text-center">Welcome Back!</h2>
+      <p class="text-sm text-gray-600 text-center mb-4">Sign in to your account</p>
+      <form onsubmit="loginUser(event)">
+        <div>
+          <label for="login-phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+          <input type="tel" id="login-phone" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <div>
+          <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="login-password" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <button type="submit" class="w-full bg-green-800 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300">Sign in</button>
+      </form>
+      <p class="text-sm text-gray-600 text-center mt-4">Don't have an account? <a id="switchToSignup" class="text-green-800 cursor-pointer font-bold">Sign up</a></p>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="signupForm" class="hidden">
+      <h2 class="text-2xl font-bold text-green-800 text-center">Create an Account</h2>
+      <p class="text-sm text-gray-600 text-center mb-4">Join us today!</p>
+      
+        <form onsubmit="signupUser(event)">
+        <div>
+          <label for="signup-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input type="text" id="signup-name" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <div>
+          <label for="signup-phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+          <input type="tel" id="signup-phone" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <div>
+          <label for="signup-password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="signup-password" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <div>
+          <label for="signup-pincode" class="block text-sm font-medium text-gray-700">Pincode</label>
+          <input type="text" id="signup-pincode" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <div>
+          <label for="signup-state" class="block text-sm font-medium text-gray-700">State</label>
+          <input type="text" id="signup-state" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <div>
+          <label for="signup-country" class="block text-sm font-medium text-gray-700">Country</label>
+          <input type="text" id="signup-country" required class="w-full px-4 py-2 border rounded-lg focus:ring-green-800 focus:border-green-800 transition duration-300">
+        </div>
+        <button type="submit" class="w-full bg-green-800 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300">Sign Up</button>
+      </form>
+      <p class="text-sm text-gray-600 text-center mt-4">Already have an account? <a id="switchToLogin" class="text-green-800 cursor-pointer font-bold">Login</a></p>
+    </div>
+
+  </div>
+
+  <!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+      const showLogin = document.getElementById("showLogin");
+      const showSignup = document.getElementById("showSignup");
+      const switchToSignup = document.getElementById("switchToSignup");
+      const switchToLogin = document.getElementById("switchToLogin");
+
+      function showLoginForm() {
+        loginForm.classList.remove("hidden");
+        signupForm.classList.add("hidden");
+        showLogin.classList.add("border-green-800", "text-green-800");
+        showSignup.classList.remove("border-green-800", "text-green-800");
+      }
+
+      function showSignupForm() {
+        signupForm.classList.remove("hidden");
+        loginForm.classList.add("hidden");
+        showSignup.classList.add("border-green-800", "text-green-800");
+        showLogin.classList.remove("border-green-800", "text-green-800");
+      }
+
+      showLogin.addEventListener("click", showLoginForm);
+      showSignup.addEventListener("click", showSignupForm);
+      switchToSignup.addEventListener("click", showSignupForm);
+      switchToLogin.addEventListener("click", showLoginForm);
+    });
+  </script> -->
+
+  <script src="app.js"></script>
+
+</body>
+</html>

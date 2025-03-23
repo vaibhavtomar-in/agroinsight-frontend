@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | AgroInsight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2F855A",
+                        secondary: "#68D391",
+                        accent: "#D69E2E"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 overflow-x-hidden">
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-green-800 transition-all duration-300 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <!-- Logo -->
+      <a href="home.html" class="text-white text-3xl font-bold tracking-wide flex items-center">
+        <span class="text-yellow-400 mr-2">🌱</span>
+        Agro-Insight
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex space-x-8 text-lg font-medium" id="desktop-nav">
+        <li><a href="home.html" class="text-white hover:text-yellow-400 transition-colors">Home</a></li>
+        <li><a href="index.html" class="text-white hover:text-yellow-400 transition-colors">Services</a></li>
+        <li><a href="about.html" class="text-white hover:text-yellow-400 transition-colors">About</a></li>
+        <li><a href="history.html" class="text-white hover:text-yellow-400 transition-colors">History</a></li>
+        <!-- Auth button will be inserted here by JS -->
+      </ul>
+
+      <!-- Hamburger Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <div class="hamburger"></div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Full-Screen Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-green-800 text-white flex flex-col items-center justify-center space-y-6 text-2xl transform -translate-x-full transition-transform duration-300 z-50">
+    <a href="home.html" class="mobile-link" onclick="closeMenu()">Home</a>
+    <a href="about.html" class="mobile-link" onclick="closeMenu()">About</a>
+    <a href="history.html" class="mobile-link" onclick="closeMenu()">History</a>
+    <a href="index.html" class="mobile-link" onclick="closeMenu()">Services</a>
+    <!-- Auth mobile link will be inserted here by JS -->
+  </div>
+
+
+<!-- Hero Section with Parallax Effect -->
+<section class="relative pt-24 bg-green-700 text-white text-center py-24 px-6 overflow-hidden">
+  <div class="absolute inset-0 bg-[url('static/images/about.png')] bg-cover bg-center opacity-20"></div>
+  <div class="relative z-10">
+      <h1 class="text-5xl font-bold mb-4 text-black" data-aos="fade-up">About AgroInsight</h1>
+      <p class="text-xl text-black mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+          Revolutionizing agriculture with AI-driven insights for better crop yield.
+      </p>
+
+      <div class="flex justify-center mt-8" data-aos="fade-up" data-aos-delay="300">
+          <a href="#" id="get-started-btn" class="bg-accent hover:bg-yellow-500 text-green-900 font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+              Try Our Services
+          </a>
+      </div>
+  </div>
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="w-full h-auto">
+          <path fill="#F3F4F6" fill-opacity="1" d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,186.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+  </div>
+</section>
+
+
+  <!-- About Us Content -->
+  <section class="container mx-auto py-16 px-6">
+    <div class="grid md:grid-cols-2 items-center gap-12">
+        <div class="relative overflow-hidden rounded-lg shadow-xl" data-aos="fade-right">
+            <img
+                src="images/about.png"
+                class="rounded-lg w-full transform hover:scale-105 transition-transform duration-700"
+                alt="About Us Image">
+            <div class="absolute inset-0 bg-gradient-to-tr from-green-700 to-transparent opacity-30 hover:opacity-0 transition-opacity duration-500"></div>
+        </div>
+        <div data-aos="fade-left">
+            <h2 class="text-4xl font-bold text-primary mb-6">Who We Are</h2>
+            <p class="text-gray-700 text-lg mb-6">
+                AgroInsight is a platform dedicated to helping farmers make data-driven decisions
+                to improve their agricultural yield. We combine technology with agricultural expertise to offer
+                <span class="font-semibold text-green-700">crop recommendations, soil analysis, and market insights</span>.
+            </p>
+            <p class="text-gray-700 text-lg mb-8">
+                Our mission is to empower farmers with AI tools that make precision agriculture accessible to everyone,
+                regardless of farm size or technical expertise.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-green-50 p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+                    <i class="fas fa-seedling text-3xl text-green-600 mb-2"></i>
+                    <h3 class="font-bold text-green-800">Smart Farming</h3>
+                    <p class="text-sm text-gray-600">AI-powered recommendations</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+                    <i class="fas fa-chart-line text-3xl text-green-600 mb-2"></i>
+                    <h3 class="font-bold text-green-800">Data Analysis</h3>
+                    <p class="text-sm text-gray-600">Turning data into insights</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Impact Statistics with Counter Animation -->
+  <section class="bg-secondary py-16 px-6 text-center text-white relative">
+    <div class="absolute inset-0 bg-green-700 opacity-10 pattern-dots"></div>
+    <div class="relative z-10">
+        <h2 class="text-4xl font-bold mb-12" data-aos="fade-up">Our Impact</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <div class="p-8 bg-white text-primary shadow-xl rounded-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-users text-4xl text-green-600 mb-4"></i>
+                <h3 class="text-4xl font-bold counter" data-target="500">0</h3>
+                <p class="text-lg text-gray-700">Farmers Empowered</p>
+            </div>
+            <div class="p-8 bg-white text-primary shadow-xl rounded-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-chart-bar text-4xl text-green-600 mb-4"></i>
+                <h3 class="text-4xl font-bold"><span class="counter" data-target="25">0</span>%</h3>
+                <p class="text-lg text-gray-700">Increase in Crop Yield</p>
+            </div>
+            <div class="p-8 bg-white text-primary shadow-xl rounded-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-globe text-4xl text-green-600 mb-4"></i>
+                <h3 class="text-4xl font-bold counter" data-target="10">0</h3>
+                <p class="text-lg text-gray-700">Countries Using Our AI</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Carousel -->
+  <section class="py-16 px-6 text-center bg-gray-200">
+    <h2 class="text-4xl font-bold text-primary mb-12" data-aos="fade-up">What Farmers Say</h2>
+
+    <div class="relative max-w-4xl mx-auto" data-aos="fade-up">
+        <div class="testimonial-slider overflow-hidden">
+            <div class="testimonial-track flex transition-transform duration-700">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide min-w-full bg-white shadow-lg rounded-lg p-8">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-full bg-green-100 mb-4 flex items-center justify-center">
+                            <i class="fas fa-user-circle text-3xl text-green-600"></i>
+                        </div>
+                        <p class="italic text-gray-700 text-lg mb-6">"AgroInsight helped me optimize my crops and increase my yield by 30%! The AI recommendations are a game-changer!"</p>
+                        <div class="text-yellow-500 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-green-800">Ramesh Kumar</h3>
+                        <p class="text-gray-600">Farmer, Karnataka</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide min-w-full bg-white shadow-lg rounded-lg p-8">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-full bg-green-100 mb-4 flex items-center justify-center">
+                            <i class="fas fa-user-circle text-3xl text-green-600"></i>
+                        </div>
+                        <p class="italic text-gray-700 text-lg mb-6">"I was struggling with soil management, but AgroInsight provided insights that saved me a lot of time and money!"</p>
+                        <div class="text-yellow-500 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-green-800">Sita Devi</h3>
+                        <p class="text-gray-600">Farm Owner, Punjab</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide min-w-full bg-white shadow-lg rounded-lg p-8">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-full bg-green-100 mb-4 flex items-center justify-center">
+                            <i class="fas fa-user-circle text-3xl text-green-600"></i>
+                        </div>
+                        <p class="italic text-gray-700 text-lg mb-6">"The crop disease detection helped me save my entire harvest. This technology is transforming traditional farming!"</p>
+                        <div class="text-yellow-500 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-green-800">Arjun Singh</h3>
+                        <p class="text-gray-600">Organic Farmer, Maharashtra</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <button class="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/2 bg-green-700 text-white w-10 h-10 rounded-full flex items-center justify-center focus:outline-none hover:bg-green-600 transition-colors md:-translate-x-6" id="prev-btn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-1/2 bg-green-700 text-white w-10 h-10 rounded-full flex items-center justify-center focus:outline-none hover:bg-green-600 transition-colors md:translate-x-6" id="next-btn">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Dots Navigation -->
+        <div class="flex justify-center mt-6 space-x-2">
+            <button class="w-3 h-3 rounded-full bg-green-700 testimonial-dot active" data-index="0"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 testimonial-dot" data-index="1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 testimonial-dot" data-index="2"></button>
+        </div>
+    </div>
+  </section>
+
+  <!-- Meet Our Team with Hover Effects -->
+  <section class="container mx-auto py-16 px-6 text-center">
+      <h2 class="text-4xl font-bold text-primary mb-12" data-aos="fade-up">Meet Our Team</h2>
+
+      <div class="flex flex-wrap justify-center gap-8">
+          <!-- Team Member 1 -->
+          <div class="bg-white shadow-xl rounded-lg overflow-hidden text-center w-80 group" data-aos="fade-up" data-aos-delay="100">
+              <div class="relative overflow-hidden h-64">
+                  <img src="images/siyona.jpeg" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-green-800 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300 flex flex-col justify-end p-4">
+                      <p class="text-white text-sm transform translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                          A passionate innovator bridging ML Models and UI integrated with knowledge of crops.
+                      </p>
+                  </div>
+              </div>
+              <div class="p-6">
+                  <h3 class="text-xl font-bold text-primary">Siyona Snotra</h3>
+                  <p class="text-gray-600">Founder & CEO</p>
+                  <div class="flex justify-center mt-4 space-x-3">
+                      <a href="#" class="text-blue-600 hover:text-blue-800 transform hover:scale-125 transition-transform duration-300">
+                          <i class="fab fa-linkedin fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-gray-600 hover:text-gray-800 transform hover:scale-125 transition-transform duration-300">
+                          <i class="fab fa-github fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-blue-400 hover:text-blue-600 transform hover:scale-125 transition-transform duration-300">
+                          <i class="fab fa-twitter fa-lg"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Team Member 2 -->
+          <div class="bg-white shadow-xl rounded-lg overflow-hidden text-center w-80 group" data-aos="fade-up" data-aos-delay="200">
+              <div class="relative overflow-hidden h-64">
+                  <img src="images/vaibhav.jpeg" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-green-800 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300 flex flex-col justify-end p-4">
+                      <p class="text-white text-sm transform translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                          A visionary leader with backend expertise and experience in agricultural technology.
+                      </p>
+                  </div>
+              </div>
+              <div class="p-6">
+                  <h3 class="text-xl font-bold text-primary">Vaibhav Tomar</h3>
+                  <p class="text-gray-600">Founder & CEO</p>
+                  <div class="flex justify-center mt-4 space-x-3">
+                      <a href="#" class="text-blue-600 hover:text-blue-800 transform hover:scale-125 transition-transform duration-300">
+                          <i class="fab fa-linkedin fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-gray-600 hover:text-gray-800 transform hover:scale-125 transition-transform duration-300">
+                          <i class="fab fa-github fa-lg"></i>
+                      </a>
+                      <a href="#" class="text-blue-400 hover:text-blue-600 transform hover:scale-125 transition-transform duration-300">
+                          <i class="fab fa-twitter fa-lg"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Our Process Section -->
+  <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold text-primary text-center mb-16" data-aos="fade-up">Our Process</h2>
+
+          <div class="relative">
+              <!-- Progress Line -->
+              <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-green-200 transform -translate-x-1/2"></div>
+
+              <!-- Steps -->
+              <div class="space-y-24">
+                  <!-- Step 1 -->
+                  <div class="relative flex flex-col md:flex-row items-center">
+                      <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0" data-aos="fade-right">
+                          <div class="bg-white p-6 rounded-lg shadow-lg">
+                              <h3 class="text-2xl font-bold text-green-700 mb-4">Data Collection</h3>
+                              <p class="text-gray-700">We gather essential information about your farm, including soil type, climate conditions, and historical crop data to create a baseline for analysis.</p>
+                          </div>
+                      </div>
+                      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-green-700 items-center justify-center text-white font-bold border-4 border-white z-10">1</div>
+                      <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                          <img src="images/about.png" alt="Data Collection" class="rounded-lg shadow-lg">
+                      </div>
+                  </div>
+
+                  <!-- Step 2 -->
+                  <div class="relative flex flex-col md:flex-row-reverse items-center">
+                      <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0" data-aos="fade-left">
+                          <div class="bg-white p-6 rounded-lg shadow-lg">
+                              <h3 class="text-2xl font-bold text-green-700 mb-4">ML Model Analysis</h3>
+                              <p class="text-gray-700">Our advanced algorithms process your farm data to identify patterns, opportunities, and potential challenges for optimal crop management.</p>
+                          </div>
+                      </div>
+                      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-green-700 items-center justify-center text-white font-bold border-4 border-white z-10">2</div>
+                      <div class="md:w-1/2 md:pr-12" data-aos="fade-right">
+                          <img src="images/about.png" alt="AI Analysis" class="rounded-lg shadow-lg">
+                      </div>
+                  </div>
+
+                  <!-- Step 3 -->
+                  <div class="relative flex flex-col md:flex-row items-center">
+                      <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0" data-aos="fade-right">
+                          <div class="bg-white p-6 rounded-lg shadow-lg">
+                              <h3 class="text-2xl font-bold text-green-700 mb-4">Recommendations</h3>
+                              <p class="text-gray-700">We provide personalized recommendations for crop selection, planting schedules, fertilization, and resource management based on the AI analysis.</p>
+                          </div>
+                      </div>
+                      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-green-700 items-center justify-center text-white font-bold border-4 border-white z-10">3</div>
+                      <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                          <img src="images/about.png" alt="Recommendations" class="rounded-lg shadow-lg">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Interactive FAQ Section -->
+  <section class="container mx-auto py-16 px-6">
+      <h2 class="text-4xl font-bold text-primary text-center mb-12" data-aos="fade-up">Frequently Asked Questions</h2>
+
+      <div class="max-w-3xl mx-auto space-y-4" data-aos="fade-up" data-aos-delay="100">
+          <!-- FAQ Item 1 -->
+          <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+              <button class="faq-question w-full text-left p-6 flex justify-between items-center focus:outline-none">
+                  <span class="text-lg font-semibold text-green-800">How does AgroInsight's AI work?</span>
+                  <i class="fas fa-chevron-down text-green-700 transition-transform duration-300"></i>
+              </button>
+              <div class="faq-answer px-6 pb-6 hidden">
+                  <p class="text-gray-700">Our AI combines machine learning models with agricultural science to analyze your farm's unique conditions. It processes data about soil composition, weather patterns, historical yields, and market trends to provide tailored recommendations for maximizing productivity and sustainability.</p>
+              </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+              <button class="faq-question w-full text-left p-6 flex justify-between items-center focus:outline-none">
+                  <span class="text-lg font-semibold text-green-800">What kind of farmers can benefit from AgroInsight?</span>
+                  <i class="fas fa-chevron-down text-green-700 transition-transform duration-300"></i>
+              </button>
+              <div class="faq-answer px-6 pb-6 hidden">
+                  <p class="text-gray-700">AgroInsight is designed to benefit farmers of all scales, from small family farms to large agricultural operations. Our platform is user-friendly and adapts to various farming practices, including traditional, organic, and precision agriculture.</p>
+              </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+              <button class="faq-question w-full text-left p-6 flex justify-between items-center focus:outline-none">
+                  <span class="text-lg font-semibold text-green-800">How accurate are the crop recommendations?</span>
+                  <i class="fas fa-chevron-down text-green-700 transition-transform duration-300"></i>
+              </button>
+              <div class="faq-answer px-6 pb-6 hidden">
+                  <p class="text-gray-700">Our recommendations have shown over 90% accuracy in field tests. The AI continuously improves as it learns from more data and outcomes. Many of our users report significant yield improvements within the first growing season after implementing our recommendations.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Call to Action with Parallax -->
+  <section class="relative py-16 bg-green-700 text-white text-center overflow-hidden">
+      <div class="absolute inset-0 bg-[url('{{ url_for('static', filename='images/about.png') }}')] bg-cover bg-center opacity-20 transform scale-105" id="parallax-bg"></div>
+      <div class="relative z-10 container mx-auto px-6">
+          <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Join Us in Transforming Agriculture</h2>
+          <p class="text-xl text-gray-100 max-w-2xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="200">Be part of the future of farming with AI-driven insights that improve yields and sustainability.</p>
+          <div data-aos="fade-up" data-aos-delay="300">
+              <a href="#" id="cta-button" class="inline-block bg-accent text-green-900 font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-yellow-500 transition-all duration-300 transform hover:scale-105">
+                  Get Started Today
+              </a>
+          </div>
+      </div>
+  </section>
+
+   <!-- Footer -->
+  <footer class="bg-green-800 text-white p-6">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h2 class="text-lg font-bold mb-2">AgroInsight</h2>
+        <p>Empowering farmers with AI-driven insights for better crop decisions.</p>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Contact Us</h2>
+        <ul>
+          <li>📍 Bengaluru, India</li>
+          <li>📞 +91 97172 31599</li>
+          <li>📧 Siyona@agroinsight.com</li>
+          <li>📧 Vaibhav@agroinsight.com</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold mb-2">Quick Links</h2>
+        <ul>
+          <li><a href="home.html" class="hover:text-yellow-400 transition-colors">Home</a></li>
+          <li><a href="index.html" class="hover:text-yellow-400 transition-colors">Get Recommendation</a></li>
+          <li><a href="about.html" class="hover:text-yellow-400 transition-colors">About Us</a></li>
+          <li><a href="history.html" class="hover:text-yellow-400 transition-colors">Recommendation History</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center mt-6 border-t border-green-700 pt-4">
+      <p>&copy; 2025 AgroInsight. All Rights Reserved.</p>
+    </div>
+  </footer>
+<script>
+ // Initialize AOS (Animate on Scroll)
+document.addEventListener('DOMContentLoaded', function() {
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true
+  });
+
+  // Check for user login status
+  const userId = localStorage.getItem('userId');
+  const isLoggedIn = userId !== null;
+
+  // Update navbar based on login status
+  const desktopNav = document.getElementById('desktop-nav');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Add auth button to desktop navbar
+  if (desktopNav) {
+    const authLi = document.createElement('li');
+    if (isLoggedIn) {
+      authLi.innerHTML = `<a href="#" id="logout-btn" class="bg-yellow-400 text-green-800 px-4 py-2 rounded-lg hover:bg-yellow-300 transition-colors">Logout</a>`;
+    } else {
+      authLi.innerHTML = `<a href="login.html" class="bg-yellow-400 text-green-800 px-4 py-2 rounded-lg hover:bg-yellow-300 transition-colors">Login/Signup</a>`;
+    }
+    desktopNav.appendChild(authLi);
+    
+    // Add event listener for logout button
+    if (isLoggedIn) {
+      document.getElementById('logout-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('userId');
+        window.location.href = 'home.html';
+      });
+    }
+  }
+
+  // Add auth link to mobile menu
+  if (mobileMenu) {
+    if (isLoggedIn) {
+      const logoutLink = document.createElement('a');
+      logoutLink.href = "#";
+      logoutLink.className = "mobile-link";
+      logoutLink.textContent = "Logout";
+      logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('userId');
+        window.location.href = 'home.html';
+        closeMenu();
+      });
+      mobileMenu.appendChild(logoutLink);
+    } else {
+      const loginLink = document.createElement('a');
+      loginLink.href = "login.html";
+      loginLink.className = "mobile-link";
+      loginLink.textContent = "Login/Signup";
+      loginLink.onclick = closeMenu;
+      mobileMenu.appendChild(loginLink);
+    }
+  }
+
+  // Set up the Get Started Today button
+  const ctaButton = document.getElementById('cta-button');
+  if (ctaButton) {
+    ctaButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (isLoggedIn) {
+        window.location.href = 'form.html';
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+  }
+
+  // Set up the "Try Our Services" button in hero section
+  const getStartedBtn = document.getElementById('get-started-btn');
+  if (getStartedBtn) {
+    getStartedBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (isLoggedIn) {
+        window.location.href = 'form.html';
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+  }
+
+  // Mobile menu functionality
+  const menuBtn = document.getElementById('menu-btn');
+
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('-translate-x-full');
+      document.body.classList.toggle('overflow-hidden');
+    });
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.add('-translate-x-full');
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  // Make closeMenu function globally available
+  window.closeMenu = closeMenu;
+
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      navbar.classList.add('bg-green-800', 'py-2');
+      navbar.classList.remove('bg-green-700', 'py-4');
+    } else {
+      navbar.classList.add('bg-green-700', 'py-4');
+      navbar.classList.remove('bg-green-800', 'py-2');
+    }
+  });
+
+  // Testimonial carousel functionality
+  const track = document.querySelector('.testimonial-track');
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  let currentIndex = 0;
+
+  if (track && slides.length && dots.length) {
+    // Set up click handlers for the navigation dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+
+    // Set up click handlers for prev/next buttons
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        goToSlide((currentIndex - 1 + slides.length) % slides.length);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        goToSlide((currentIndex + 1) % slides.length);
+      });
+    }
+
+    // Auto-advance the carousel
+    setInterval(() => {
+      goToSlide((currentIndex + 1) % slides.length);
+    }, 5000);
+
+    function goToSlide(index) {
+      track.style.transform = `translateX(-${index * 100}%)`;
+
+      // Update active dot
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('bg-green-700');
+          dot.classList.remove('bg-gray-300');
+        } else {
+          dot.classList.remove('bg-green-700');
+          dot.classList.add('bg-gray-300');
+        }
+      });
+
+      currentIndex = index;
+    }
+  }
+
+  // Counter animation for Impact statistics
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200; // The lower the faster
+
+  if (counters.length) {
+    // Set up Intersection Observer to start counters when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseInt(counter.getAttribute('data-target'));
+          let count = 0;
+          const updateCount = () => {
+            const increment = target / speed;
+            if (count < target) {
+              count += increment;
+              counter.innerText = Math.ceil(count);
+              setTimeout(updateCount, 1);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+  }
+
+  // FAQ accordion functionality
+  const faqQuestions = document.querySelectorAll('.faq-question');
+
+  if (faqQuestions.length) {
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const icon = question.querySelector('i');
+
+        // Toggle the current FAQ item
+        answer.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+
+        // Close other FAQ items
+        faqQuestions.forEach(otherQuestion => {
+          if (otherQuestion !== question) {
+            const otherAnswer = otherQuestion.nextElementSibling;
+            const otherIcon = otherQuestion.querySelector('i');
+
+            otherAnswer.classList.add('hidden');
+            otherIcon.classList.remove('rotate-180');
+          }
+        });
+      });
+    });
+  }
+
+  // Parallax effect for CTA section
+  const parallaxBg = document.getElementById('parallax-bg');
+
+  if (parallaxBg) {
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.pageYOffset;
+      parallaxBg.style.transform = `translate3d(0, ${scrollPosition * 0.05}px, 0) scale(1.05)`;
+    });
+  }
+});
+</script>
+</body>
+</html>
