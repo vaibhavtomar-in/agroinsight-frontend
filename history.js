@@ -97,7 +97,7 @@ function logout() {
 }
 
 function fetchUserDetails(userId) {
-  fetch(`http://localhost:8080/users/details?userId=${userId}`)
+  fetch(`https://agroinsight-javaspring.onrender.com/users/details?userId=${userId}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -119,7 +119,7 @@ function fetchUserDetails(userId) {
 }
 
 function fetchRecommendationHistory(userId) {
-  fetch(`http://localhost:8080/users/recommendation/history?userId=${userId}`)
+  fetch(`https://agroinsight-javaspring.onrender.com/users/recommendation/history?userId=${userId}`)
     .then((response) => {
       if (!response.ok) {
         if (response.status === 400) {

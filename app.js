@@ -113,7 +113,7 @@ function signupUser(event) {
   submitButton.disabled = true;
   submitButton.textContent = "Signing up...";
 
-  fetch("http://localhost:8080/users/signup", {
+  fetch("https://agroinsight-javaspring.onrender.com/users/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(requestData),
@@ -233,7 +233,7 @@ function loginUser(event) {
   submitButton.disabled = true;
   submitButton.textContent = "Logging in...";
 
-  fetch("http://localhost:8080/users/login", {
+  fetch("https://agroinsight-javaspring.onrender.com/users/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(requestData),
